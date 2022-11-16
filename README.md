@@ -13,15 +13,26 @@ Chisel and Verilog divider implementation.
 ### Verilog
 
 * Non-opt non-restoring divider
-* gate-level divider from [FMCAD'22](https://abs.informatik.uni-freiburg.de/src/projects_view.php?projectID=24)
-* gate-level divider translated by yosys
-```
-abc -fast -g simple,MUX
-```
+  - high-level
+  - low-level (`loop flattened`)
+  - gate-level translated by [yosys](https://github.com/YosysHQ/yosys)
+  
+    ```
+    read_verilog filename.v
+    synth -flatten
+    clean -purge
+    abc -fast -g simple,MUX
+    write_verilog filename-gl.v
+    ```
+
+* Dividers from [FMCAD'22](https://abs.informatik.uni-freiburg.de/src/projects_view.php?projectID=24) benchmark
+  - gate-level opt-old/new non-restoring divider
+  - gate-level restoring divider
 
 ### Aiger
 
-Translated from Verilog by yosys
+Translated from Verilog by [yosys](https://github.com/YosysHQ/yosys)
+
 ```
 read_verilog filename.v
 synth -flatten
